@@ -23,19 +23,30 @@ export default function ContactSection() {
         <div className="contact-right reveal">
           <div className="input-row">
             <label htmlFor="full-name">Full Name</label>
-            <input id="full-name" type="text" placeholder="Jane Doe" />
+            <input id="full-name" type="text" placeholder="Jane Doe" suppressHydrationWarning />
           </div>
           <div className="input-row">
             <label htmlFor="work-email">Work Email</label>
-            <input id="work-email" type="email" placeholder="jane@company.com" />
+            <input
+              id="work-email"
+              type="email"
+              placeholder="jane@company.com"
+              suppressHydrationWarning
+            />
           </div>
           <div className="input-row">
             <label htmlFor="automation-goal">Tell us what to automate</label>
-            <textarea id="automation-goal" rows={3} placeholder="We want to automate..." />
+            <textarea
+              id="automation-goal"
+              rows={3}
+              placeholder="We want to automate..."
+              suppressHydrationWarning
+            />
           </div>
           <motion.button
             className="contact-btn"
             type="button"
+            suppressHydrationWarning
             whileHover={{ x: 6, scale: 1.01, skewX: -3 }}
             whileTap={{ scale: 0.985 }}
             transition={{ type: "spring", stiffness: 360, damping: 24 }}

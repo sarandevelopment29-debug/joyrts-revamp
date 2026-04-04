@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Space_Mono, Syne } from "next/font/google";
+import { Anton, Bebas_Neue, Space_Mono, Syne } from "next/font/google";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -12,6 +12,12 @@ const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["400", "700", "800"],
+});
+
+const anton = Anton({
+  variable: "--font-anton",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const spaceMono = Space_Mono({
@@ -34,7 +40,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${bebasNeue.variable} ${syne.variable} ${spaceMono.variable}`}
+      className={`${bebasNeue.variable} ${syne.variable} ${spaceMono.variable} ${anton.variable}`}
     >
       <body>{children}</body>
     </html>

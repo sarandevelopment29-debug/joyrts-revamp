@@ -374,9 +374,9 @@ section {
 }
 
 .hero-title {
-  font-family: var(--font-bebas-neue), sans-serif;
+  font-family: var(--font-anton), sans-serif;
   font-size: clamp(80px, 14vw, 220px);
-  line-height: 0.88;
+  line-height: 0.82;
   letter-spacing: -0.01em;
   color: var(--fg);
   mix-blend-mode: normal;
@@ -384,8 +384,9 @@ section {
 }
 
 .hero-title .outline {
-  -webkit-text-stroke: 1px var(--fg);
+  -webkit-text-stroke: 2px var(--fg);
   color: transparent;
+  letter-spacing: 0.01em;
 }
 
 .split-line {
@@ -1838,6 +1839,8 @@ section {
   font-size: 14px;
   line-height: 1.9;
   opacity: 0.82;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .testimonial-meta {
@@ -2260,7 +2263,7 @@ section :is(strong, b) {
 
 /* Keep the original JOY/RTS hero wordmark styling */
 section .hero-title {
-  font-family: var(--font-bebas-neue), sans-serif !important;
+  font-family: var(--font-anton), sans-serif !important;
   font-weight: 400 !important;
   font-style: normal !important;
 }
@@ -2275,6 +2278,97 @@ section .hero-title {
 
 ::-webkit-scrollbar-thumb {
   background: var(--muted);
+}
+
+@media (max-width: 1200px) {
+  nav {
+    padding: 22px 30px;
+  }
+
+  nav ul {
+    gap: 28px;
+    margin-right: 108px;
+  }
+
+  .hero {
+    padding: 0 30px;
+    padding-top: 104px;
+  }
+
+  .hero-main {
+    gap: 26px;
+  }
+
+  .hero-workflow {
+    max-width: 680px;
+  }
+
+  .hero-stat-row {
+    gap: 38px;
+    margin-top: 56px;
+  }
+
+  .section-what,
+  .section-industries,
+  .section-global-map,
+  .section-testimonials,
+  .section-process,
+  .section-manifesto,
+  .section-techstack,
+  .section-contact {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .what-grid {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+
+  .what-left {
+    padding-right: 42px;
+  }
+
+  .what-right {
+    padding-left: 42px;
+  }
+
+  .industries-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .industry-card {
+    min-height: 286px;
+  }
+
+  .global-map-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .global-map-card h3 {
+    font-size: clamp(22px, 2.2vw, 34px);
+  }
+
+  .process-step {
+    padding: 32px 22px;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .testimonial-card {
+    min-height: 304px;
+  }
+
+  .tech-card {
+    min-width: 212px;
+  }
+
+  .contact-grid {
+    gap: 52px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -2302,8 +2396,7 @@ section .hero-title {
   }
 
   .hero-workflow {
-    justify-self: stretch;
-    max-width: none;
+    display: none;
   }
 
   .stack-constellation {
@@ -2403,7 +2496,7 @@ section .hero-title {
   }
 
   .testimonials-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .testimonial-card:nth-child(2),
@@ -2412,7 +2505,7 @@ section .hero-title {
   }
 
   .testimonial-card:nth-child(3) {
-    grid-column: span 2;
+    grid-column: auto;
   }
 
   .global-map-stage {
@@ -2841,6 +2934,16 @@ section .hero-title {
     transform: none !important;
   }
 
+  .testimonial-card:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .testimonial-card::before {
+    left: 13px;
+    top: 12px;
+    width: 24px;
+  }
+
   .testimonial-quote {
     margin-top: 12px;
     font-size: 12px;
@@ -2849,11 +2952,13 @@ section .hero-title {
 
   .testimonial-meta strong {
     font-size: 18px;
+    line-height: 1.25;
   }
 
   .testimonial-meta span {
     font-size: 8px;
     letter-spacing: 0.1em;
+    line-height: 1.5;
   }
 
   .global-map-head p {
@@ -2958,7 +3063,9 @@ section .hero-title {
   }
 
   .section-manifesto {
-    padding: 56px 20px;
+    padding: 56px 20px 88px;
+    min-height: auto;
+    justify-content: flex-start;
   }
 
   .section-techstack {
