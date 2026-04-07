@@ -28,8 +28,6 @@ export default function Home() {
   const tri3dRef = useRef<HTMLDivElement | null>(null);
   const cursorRef = useRef<HTMLDivElement | null>(null);
   const cursorRingRef = useRef<HTMLDivElement | null>(null);
-  const flowCanvasRef = useRef<HTMLDivElement | null>(null);
-  const flowWireSvgRef = useRef<SVGSVGElement | null>(null);
 
   const { scrollY, scrollYProgress } = useScroll();
   const heroParallaxY = useTransform(scrollY, [0, 900], [0, 130]);
@@ -252,94 +250,6 @@ export default function Home() {
     };
   }, []);
 
-  useEffect(() => {
-    const canvas = flowCanvasRef.current;
-    const svg = flowWireSvgRef.current;
-
-    if (!canvas || !svg) {
-      return;
-    }
-
-    const getAnchor = (nodeName: string, side: "left" | "right" | "top" | "bottom") => {
-      const node = canvas.querySelector<HTMLElement>(`[data-node="${nodeName}"]`);
-      if (!node) {
-        return null;
-      }
-
-      const canvasRect = canvas.getBoundingClientRect();
-      const rect = node.getBoundingClientRect();
-
-      const centerX = rect.left - canvasRect.left + rect.width / 2;
-      const centerY = rect.top - canvasRect.top + rect.height / 2;
-
-      if (side === "left") {
-        return { x: rect.left - canvasRect.left, y: centerY };
-      }
-      if (side === "right") {
-        return { x: rect.right - canvasRect.left, y: centerY };
-      }
-      if (side === "top") {
-        return { x: centerX, y: rect.top - canvasRect.top };
-      }
-      return { x: centerX, y: rect.bottom - canvasRect.top };
-    };
-
-    const drawEdge = (
-      edgeName: string,
-      fromNode: string,
-      fromSide: "left" | "right" | "top" | "bottom",
-      toNode: string,
-      toSide: "left" | "right" | "top" | "bottom",
-    ) => {
-      const path = svg.querySelector<SVGPathElement>(`[data-edge="${edgeName}"]`);
-      const from = getAnchor(fromNode, fromSide);
-      const to = getAnchor(toNode, toSide);
-
-      if (!path || !from || !to) {
-        return;
-      }
-
-      const dx = to.x - from.x;
-      const curve = Math.max(Math.abs(dx) * 0.45, 44);
-      const cp1x = from.x + (dx >= 0 ? curve : -curve);
-      const cp2x = to.x - (dx >= 0 ? curve : -curve);
-      path.setAttribute("d", `M${from.x} ${from.y} C${cp1x} ${from.y} ${cp2x} ${to.y} ${to.x} ${to.y}`);
-    };
-
-    const redraw = () => {
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
-      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-
-      drawEdge("webhook-ai", "webhook", "right", "ai", "left");
-      drawEdge("ai-crm", "ai", "right", "crm", "left");
-      drawEdge("ai-slack", "ai", "right", "slack", "left");
-      drawEdge("ai-gmail", "ai", "right", "gmail", "left");
-      drawEdge("slack-ticket", "slack", "right", "ticket", "left");
-      drawEdge("gmail-ticket", "gmail", "right", "ticket", "left");
-      drawEdge("ticket-end", "ticket", "top", "end", "bottom");
-    };
-
-    redraw();
-    requestAnimationFrame(redraw);
-    requestAnimationFrame(redraw);
-
-    const resizeObserver = new ResizeObserver(() => {
-      redraw();
-    });
-
-    resizeObserver.observe(canvas);
-    const nodes = canvas.querySelectorAll<HTMLElement>("[data-node]");
-    nodes.forEach((node) => resizeObserver.observe(node));
-
-    window.addEventListener("resize", redraw);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", redraw);
-    };
-  }, []);
-
   return (
     <>
       <SiteShell
@@ -355,11 +265,7 @@ export default function Home() {
         cursorRingRef={cursorRingRef}
       />
 
-      <HeroSection
-        heroParallaxY={heroParallaxY}
-        flowCanvasRef={flowCanvasRef}
-        flowWireSvgRef={flowWireSvgRef}
-      />
+      <HeroSection heroParallaxY={heroParallaxY} />
       <WhatSection />
       <IndustriesSection />
       <GlobalMapSection />

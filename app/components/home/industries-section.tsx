@@ -25,11 +25,11 @@ const INDUSTRIES = [
     points: ["Recruitment pipeline automation", "Employee lifecycle workflows"],
   },
   {
-    title: "Logistics",
+    title: "Application Development",
     tag: "Sector 04",
     blurb:
-      "Coordinate shipments, exceptions, and ETA updates in real time to reduce delays and manual escalations.",
-    points: ["Dispatch and reroute logic", "Live SLA and delay monitoring"],
+      "Build custom business applications tailored to your workflows, operations, and long-term growth needs.",
+    points: ["Custom portal and dashboard development", "Scalable backend and API architecture"],
   },
   {
     title: "Retail and E-commerce",
